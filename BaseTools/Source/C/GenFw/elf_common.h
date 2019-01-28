@@ -1053,5 +1053,6 @@ typedef struct {
 #define	R_X86_64_GOTTPOFF	22	/* PC relative offset to IE GOT entry */
 #define	R_X86_64_TPOFF32	23	/* Offset in static TLS block */
 
+#define R_X86_64_REX_GOTPCRELX	0x2a
 
 #endif /* !_SYS_ELF_COMMON_H_ */
