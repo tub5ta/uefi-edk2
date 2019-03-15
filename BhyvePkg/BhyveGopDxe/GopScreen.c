@@ -30,14 +30,7 @@ Abstract:
 EFI_EVENT               mGopScreenExitBootServicesEvent;
 
 GOP_MODE_DATA mGopModeData[] = {
-    { 1920,  1200, 32, 0 },
-    { 1920,  1080, 32, 0 },
-    { 1600,  1200, 32, 0 },
-    { 1600,  900,  32, 0 },
-    { 1280,  1024, 32, 0 },
-    { 1280,  720,  32, 0 },
-    { 1024,  768,  32, 0 },
-    { 800,   600,  32, 0 },
+    { 0,     0,    32, 0 },  // Filled in with user-spec'd resolution
     { 640,   480,  32, 0 }
     };
 
@@ -299,6 +292,10 @@ BhyveGopConstructor (
   GOP_PRIVATE_DATA    *Private
   )
 {
+  // Set mode 0 to be the requested resolution
+  mGopModeData[0].HorizontalResolution = PcdGet32 ( PcdVideoHorizontalResolution);
+  mGopModeData[0].VerticalResolution = PcdGet32 ( PcdVideoVerticalResolution );
+
   Private->ModeData = mGopModeData;
 
   Private->GraphicsOutput.QueryMode      = BhyveGopQuerytMode;
